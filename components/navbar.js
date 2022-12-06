@@ -80,9 +80,9 @@ export default function Navbar (){
     const getUserCart = async () => {
         const res = await fetch(`https://dummyjson.com/carts/user/${currentUser.id}`)
         const data = await res.json()
-        setUserCart(data.carts)
+        sessionStorage.setItem('userCart', JSON.stringify(data.carts))
     }
-
+    
     useEffect(()=>{
         getSearch()
         if(searchKeyword.length <= 1){
@@ -91,7 +91,7 @@ export default function Navbar (){
             setIsSearch(false)
         }
     }, [searchKeyword])
-    console.log(userCart)
+    
     useEffect(()=>{
         getCategory()
         getCategoriesItems()
@@ -100,10 +100,14 @@ export default function Navbar (){
         }
     },[])
 
+
     useEffect(()=>{
         setIsLogin(prev=>!prev)
         if(currentUser !== null){
             getUserCart()
+        }
+        if(sessionStorage.getItem('userCart') !== null){
+            setUserCart(JSON.parse(sessionStorage.getItem('userCart')))
         }
     },[currentUser])
     
@@ -160,7 +164,6 @@ export default function Navbar (){
         // setIsLogin(prev=>!prev)
     }
     
-
     return (
         <>
         {!isModalLogin && <ModalLogin 
@@ -169,7 +172,9 @@ export default function Navbar (){
         handleChangePassword={handleChangePassword}
         handleSubmitLogin={handleSubmitLogin}
          />}
-        {!isModalCart && <ModalCart userCart={userCart}/>}
+        {!isModalCart && <ModalCart 
+        userCart={userCart}
+        handleClickCart={handleClickCart}/>}
         <div className='w-full h-24 shadow-md sticky top-0 z-10 bg-white'>
             <div className='max-w-7xl h-full mx-auto items-center justify-between flex'>
                 <Link href="/">
@@ -189,14 +194,16 @@ export default function Navbar (){
                 handleClickCart={handleClickCart} />
                 {isLogin && <div className="flex ml-5">
                     <button onClick={handleClickModalLogin} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md mr-1">Masuk</button>
-                    <Link href="/daftar"><button className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] bg-[#8D72E1] hover:bg-[#6C4AB6] text-white font-semibold px-2 py-1 rounded-md ml-1">Daftar</button></Link>
+                    <Link href="/daftar">
+                        <button className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] bg-[#8D72E1] hover:bg-[#6C4AB6] text-white font-semibold px-2 py-1 rounded-md ml-1">Daftar</button>
+                    </Link>
                 </div>}
-                {!isLogin && <div className="flex ml-5 justify-between">
-                    <div className="text-sm mx-2">
-                        <p className="">Welcome</p>
-                        <p className="font-semibold">{currentUser!==null ? currentUser.lastName : ''}  </p>
+                {!isLogin && <div className="flex ml-5">
+                    <div className="text-sm w-fit">
+                        <span className="">{currentUser!==null && currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
+                        <p className="font-semibold"> {currentUser!==null ? currentUser.lastName : ''}</p>
                     </div>
-                    <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md mx-2" >Logout</button>
+                    <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md ml-2" >Logout</button>
                 </div>}
                 
             </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import Carousel from "../components/carousel"
 import ItemsCard from "../components/itemsCard"
-import Navbar from "../components/navbar"
 import Link from "next/link"
 
 export default function Home() {
@@ -77,8 +76,30 @@ export default function Home() {
     getAllItems()
   }, [])
 
-  const getElectronics = allItems.filter(data => data.category === "smartphones" || data.category === "laptops").splice(0,5)
-  const getForYourBody = allItems.filter(data => data.category === "fragrances" || data.category === "skincare").splice(0,5)
+  const [electronitsFirstNumber, setElectronitsFirstNumber] = useState(0)
+  const [yourBodyFirstNumber, setYourBodyFirstNumber] = useState(0)
+
+  const getElectronics = allItems.filter(data => data.category === "smartphones" || data.category === "laptops").splice(electronitsFirstNumber,5)
+  const getForYourBody = allItems.filter(data => data.category === "fragrances" || data.category === "skincare").splice(yourBodyFirstNumber,5)
+
+
+  const handleNext = (a) => {
+    if(a === 'electronics'){
+    setElectronitsFirstNumber(prev=>prev < 5 ? prev+1 : prev+0)
+    } else {
+      setYourBodyFirstNumber(prev=>prev < 5 ? prev+1 : prev+0)
+    }
+  }
+  
+  const handleBefore = (a) => {
+    if(a === 'electronics'){
+      setElectronitsFirstNumber(prev=>prev > 0 ? prev-1 : prev+0)
+    } else {
+      setYourBodyFirstNumber(prev=>prev > 0 ? prev-1 : prev+0)
+    }
+  }
+
+  console.log(electronitsFirstNumber)
 
   return (
     <div>
@@ -88,18 +109,28 @@ export default function Home() {
           <div className="w-[22rem] h-[24rem] absolute -top-6 left-0 rounded-tl-md rounded-bl-md rounded-tr-[15rem] rounded-br-[15rem] bg-gradient-to-r from-[#6C4AB6] to-[#b19eeb] -z-10"></div>
           {simplyBackground()}
           <h2 className="text-white font-semibold text-2xl italic">Electronics</h2>
-          <div className="flex justify-between">
-            <ItemsCard getDataItems={getElectronics} />
-          <button className="w-16 h-16 rounded-full self-center ml-2 bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1"><img src="./images/right-arrow.png" className="w-fit" /></button>
+          <div className="flex justify-center">
+            <button onClick={()=>handleBefore('electronics')} className="shadow-md absolute left-5 top-1/2 transform -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
+              <img src="./images/left-icon.png" className="w-fit" />
+            </button>
+              <ItemsCard getDataItems={getElectronics} />
+            <button onClick={()=>handleNext('electronics')} className="shadow-md absolute right-5 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1 hover:translate-x-3 origin-left">
+              <img src="./images/right-arrow.png" className="w-fit" />
+            </button>
           </div>
         </section>
         <section className="mb-16 relative px-5">
           <div className="w-[22rem] h-[24rem] absolute -top-6 left-0 rounded-tl-md rounded-bl-md rounded-tr-[15rem] rounded-br-[15rem] bg-gradient-to-r from-[#6C4AB6] to-[#b19eeb] -z-10"></div>
           {simplyBackground()}
           <h2 className="text-white font-semibold text-2xl italic">For your body !</h2>
-          <div className="flex justify-between">
-            <ItemsCard getDataItems={getForYourBody} />
-          <button className="w-16 h-16 rounded-full self-center ml-2 bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1"><img src="./images/right-arrow.png" className="w-fit" /></button>
+          <div className="flex justify-center">
+            <button onClick={()=>handleBefore('foryourbody')} className="shadow-md absolute left-5 top-1/2 transform -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
+              <img src="./images/left-icon.png" className="w-fit" />
+            </button>
+              <ItemsCard getDataItems={getForYourBody} />
+            <button onClick={()=>handleNext('foryourbody')} className="shadow-md absolute right-5 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1 hover:translate-x-3 origin-left">
+              <img src="./images/right-arrow.png" className="w-fit" />
+            </button>
           </div>
         </section>
         <section className="border-t-4 border-[#6C4AB6] w-full py-2">
