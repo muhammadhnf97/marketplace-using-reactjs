@@ -25,7 +25,7 @@ export default function Detail(){
     }
     
     const handleClickDec = () => {
-        setQuantity(prev=>prev < 1 ? prev - 0 : prev)
+        setQuantity(prev=>prev > 1 ? prev - 1 : prev)
     }
 
     const handleClickBuy = async (id) => {
@@ -88,7 +88,7 @@ export default function Detail(){
                     <button onClick={handleClickinc} className="bg-[#b19eeb] hover:bg-[#6C4AB6] w-16 text-white font-black text-2xl">+</button>
                 </div>
                 <p className="text-gray-400 text-sm">Min. pembelian 1 pcs</p>
-                <button onClick={()=>handleClickBuy(data.id)} className="w-full rounded-lg my-5 bg-[#b19eeb] hover:bg-[#6C4AB6] h-10 text-lg font-semibold text-white">B e l i</button>
+                <button type="button" onClick={()=>handleClickBuy(data.id)} className="w-full rounded-lg my-5 bg-[#b19eeb] hover:bg-[#6C4AB6] h-10 text-lg font-semibold text-white" disabled>B e l i</button>
             </div>
         </div>
         )
