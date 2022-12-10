@@ -17,7 +17,7 @@ export default function Detail(){
             .then(res=>res.json())
             .then(data=>setItemm(data))
         }
-    }, [router.query])
+    }, [query])
 
     const handleClickinc = () => {
         setQuantity(prev=>prev+1)
@@ -126,3 +126,4 @@ export default function Detail(){
         </>
     )
 }
+

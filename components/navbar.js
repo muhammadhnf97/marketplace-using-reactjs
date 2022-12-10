@@ -2,7 +2,7 @@ import ModalLogin from './modalLogin'
 import ModalCart from './modalCart'
 import Cart from './cart'
 import Link from 'next/link'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 export default function Navbar (){
