@@ -1,6 +1,6 @@
-import ModalLogin from './modalLogin'
-import ModalCart from './modalCart'
-import Cart from './cart'
+import ModalLogin from './ModalLogin'
+import ModalCart from './ModalCart'
+import Cart from './Cart'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -161,7 +161,7 @@ export default function Navbar (){
         {!isModalCart && <ModalCart 
         userCart={userCart}
         handleClickCart={handleClickCart}/>}
-        <div className='w-full h-24 shadow-md sticky top-0 z-10 bg-white'>
+        <div className='w-full h-24 shadow-md sticky top-0 z-20 bg-white'>
             <div className='max-w-7xl h-full mx-auto items-center justify-between flex'>
                 <Link href="/">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-[#6C4AB6] to-[#8D9EFF] text-transparent bg-clip-text mr-5">Estock</h1>

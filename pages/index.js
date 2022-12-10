@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Carousel from "../components/carousel"
+import Carousel from "../components/Carousel"
 import ItemsCard from "../components/ItemsCard"
 import Link from "next/link"
 import Image from "next/image"

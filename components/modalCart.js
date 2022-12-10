@@ -1,11 +1,7 @@
-import { useState } from "react"
-
-export default function ModalLogin({userCart, getTotal, handleClickCart}){
+export default function ModalLogin({userCart, handleClickCart}){
     const handleClickTutup = () => {
         handleClickCart()
     }
-
-    console.log(userCart)
 
     return(
         <div key={1} className='fixed w-[24rem] h-full bg-gradient-to-br from-[#6C4AB6] to-[#8D9EFF] z-10 right-0 py-28 px-5'>
