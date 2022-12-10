@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Carousel from "../components/carousel"
 import ItemsCard from "../components/itemsCard"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Home() {
   const [allItems, setAllItems] = useState([])
@@ -54,7 +55,7 @@ export default function Home() {
     return (
       <Link key={data.category} href={`/product/${data.category}`}>
         <div className="h-16 w-16 my-5 flex flex-col justify-center items-center rounded-full group hover:-translate-y-3 duration-200 p-3 bg-white">
-        <img src={`./images/icons/${data.icon}`} className="w-fit h-fit" />
+        <Image src={`/images/icons/${data.icon}`} width="64" height="64" />
         <span className="font-bold -bottom-4 absolute text-transparent -z-10 group-hover:text-white drop-shadow-2xl duration-200 group-hover:translate-y-1">{data.category}</span>
         </div>
       </Link>
@@ -111,11 +112,11 @@ export default function Home() {
           <h2 className="text-white font-semibold text-2xl italic">Electronics</h2>
           <div className="flex justify-center">
             <button onClick={()=>handleBefore('electronics')} className="shadow-md absolute left-5 top-1/2 transform -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
-              <img src="./images/left-icon.png" className="w-fit" />
+              <Image src="/images/left-icon.png" width="64" height="64"/>
             </button>
               <ItemsCard getDataItems={getElectronics} />
             <button onClick={()=>handleNext('electronics')} className="shadow-md absolute right-5 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1 hover:translate-x-3 origin-left">
-              <img src="./images/right-arrow.png" className="w-fit" />
+              <Image src="/images/right-arrow.png" width="64" height="64"/>
             </button>
           </div>
         </section>
@@ -125,11 +126,11 @@ export default function Home() {
           <h2 className="text-white font-semibold text-2xl italic">For your body !</h2>
           <div className="flex justify-center">
             <button onClick={()=>handleBefore('foryourbody')} className="shadow-md absolute left-5 top-1/2 transform -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
-              <img src="./images/left-icon.png" className="w-fit" />
+              <Image src="/images/left-icon.png" width="64" height="64"/>
             </button>
               <ItemsCard getDataItems={getForYourBody} />
             <button onClick={()=>handleNext('foryourbody')} className="shadow-md absolute right-5 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#8D72E1] hover:bg-[#6C4AB6] duration-200 px-3 hover:px-1 hover:translate-x-3 origin-left">
-              <img src="./images/right-arrow.png" className="w-fit" />
+              <Image src="/images/right-arrow.png" width="64" height="64"/>
             </button>
           </div>
         </section>

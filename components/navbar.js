@@ -8,7 +8,7 @@ import { use, useEffect, useState } from 'react'
 export default function Navbar (){
     const [allCategory, setCategories] = useState([])
     const [categoryItems, setCategoryItems] = useState([])
-    const [thisCategory, setThisCategory] = useState(null)
+    const [thisCategory, setThisCategory] = useState([])
     const [searchKeyword, setSearchKeyword ] = useState('')
     const [searchResult, setSearchResult] = useState([])
     const [username, setUsername] = useState('')
@@ -70,19 +70,14 @@ export default function Navbar (){
             } else {
                 const data = await res.json()
                 localStorage.setItem('currentUser', JSON.stringify(data))
-                setCurrentUser(data)
+                window.location.reload();
             }
             
         } catch (error) {
             alert(error)
         }
     }
-    const getUserCart = async () => {
-        const res = await fetch(`https://dummyjson.com/carts/user/${currentUser.id}`)
-        const data = await res.json()
-        sessionStorage.setItem('userCart', JSON.stringify(data.carts))
-    }
-    
+
     useEffect(()=>{
         getSearch()
         if(searchKeyword.length <= 1){
@@ -95,22 +90,23 @@ export default function Navbar (){
     useEffect(()=>{
         getCategory()
         getCategoriesItems()
-        if(localStorage.getItem('currentUser') !== null){
+        if(localStorage.getItem('currentUser') !== null ){
             setCurrentUser(JSON.parse(localStorage.getItem('currentUser')))
+            setIsLogin(false)
+        }
+        if(sessionStorage.getItem('userCart') !== null){
+            setUserCart(JSON.parse(sessionStorage.getItem('userCart')))
+        } else {
+            setUserCart([
+                {id:1,
+                title : "hiya hiya",
+                price : 299,
+                discountPercentage : 19,
+                quantity : 3}])
         }
     },[])
 
 
-    useEffect(()=>{
-        setIsLogin(prev=>!prev)
-        if(currentUser !== null){
-            getUserCart()
-        }
-        if(sessionStorage.getItem('userCart') !== null){
-            setUserCart(JSON.parse(sessionStorage.getItem('userCart')))
-        }
-    },[currentUser])
-    
     const handleMouseEnter = () => {
         setImageCart(prev=>!prev)
     }
@@ -152,18 +148,15 @@ export default function Navbar (){
 
     const handleSubmitLogin = (e) => {
         e.preventDefault()
-        handleClickModalLogin()
         getUser()
 
     }
 
     const handleClickLogout = () => {
         localStorage.removeItem('currentUser')
-        setCurrentUser(null)
-        setUserCart([])
-        // setIsLogin(prev=>!prev)
+        setIsLogin(prev=>!prev)
     }
-    
+
     return (
         <>
         {!isModalLogin && <ModalLogin 
@@ -200,12 +193,11 @@ export default function Navbar (){
                 </div>}
                 {!isLogin && <div className="flex ml-5">
                     <div className="text-sm w-fit">
-                        <span className="">{currentUser!==null && currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
-                        <p className="font-semibold"> {currentUser!==null ? currentUser.lastName : ''}</p>
+                        <span className="">{currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
+                        <p className="font-semibold">{currentUser.lastName}</p>
                     </div>
                     <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md ml-2" >Logout</button>
                 </div>}
-                
             </div>
             {!isKategori && <div className='absolute w-full h-screen'>
                 <button className='absolute w-full h-full' onClick={handleClickKategori}></button>

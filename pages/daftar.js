@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Daftar(){
     return (
@@ -7,7 +8,7 @@ export default function Daftar(){
             <p className="text-lg font-bold italic">"Best place to buy stuff"</p>
             <div className="flex w-full h-fit items-center justify-evenly p-10">
                 <div className="flex flex-col">
-                    <img src="./images/usagi.png" className="w-[450px] h-[450px]" />
+                    <Image src="./images/usagi.png" className="w-[450px] h-[450px]" />
                     <p className="font-bold text-2xl">Jual Beli Mudah Hanya di Estock</p>
                     <p className="">Gabung dan rasakan kemudahan bertransaksi di Estock</p>
                 </div>
