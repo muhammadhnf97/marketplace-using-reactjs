@@ -1,8 +1,11 @@
-export default function ModalLogin({userCart, handleClickCart}){
+import { useState } from "react"
+
+export default function ModalLogin({userCart, getTotal, handleClickCart}){
     const handleClickTutup = () => {
         handleClickCart()
     }
 
+    console.log(userCart)
 
     return(
         <div key={1} className='fixed w-[24rem] h-full bg-gradient-to-br from-[#6C4AB6] to-[#8D9EFF] z-10 right-0 py-28 px-5'>
@@ -21,13 +24,12 @@ export default function ModalLogin({userCart, handleClickCart}){
                     </div>
                 </div>
             )
-    })}
+            })}
             </div>
-                {userCart.map(data=>{
-                    return(
-                        <p key={data.id} className="text-white text-xl font-semibold">Total Belanja : Rp. {data.total * 15000} ,-</p>
-                    )
-                })}
+            <p className="text-white text-xl font-semibold">Total Belanja : Rp. {userCart.reduce((prev, current)=>{
+                return prev + (current.price * 15000)
+            }, 0)}</p>
+
             
             <button onClick={handleClickTutup} className="shadow-md absolute left-10 bottom-20 transform -translate-y-1/2 z-10 w-fit h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
                 <div className="flex">

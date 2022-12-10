@@ -96,16 +96,8 @@ export default function Navbar (){
         }
         if(sessionStorage.getItem('userCart') !== null){
             setUserCart(JSON.parse(sessionStorage.getItem('userCart')))
-        } else {
-            setUserCart([
-                {id:1,
-                title : "hiya hiya",
-                price : 299,
-                discountPercentage : 19,
-                quantity : 3}])
         }
     },[])
-
 
     const handleMouseEnter = () => {
         setImageCart(prev=>!prev)
@@ -149,12 +141,13 @@ export default function Navbar (){
     const handleSubmitLogin = (e) => {
         e.preventDefault()
         getUser()
-
     }
 
     const handleClickLogout = () => {
         localStorage.removeItem('currentUser')
+        sessionStorage.removeItem('userCart')
         setIsLogin(prev=>!prev)
+        window.location.reload();
     }
 
     return (

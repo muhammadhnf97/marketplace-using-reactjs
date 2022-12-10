@@ -7,6 +7,7 @@ export default function Detail(){
     const [item, setItemm] = useState([])
     const [buyed, setBuyed] = useState(null)
     const [quantity, setQuantity] = useState(1)
+    const [isBeli, setIsBeli] = useState(false)
     const router = useRouter()
     const query = router.query.id
     
@@ -57,7 +58,6 @@ export default function Detail(){
         window.location.reload();
         
     }
-    console.log(buyed)
     useEffect(()=>{
         if(buyed !== null){
             sessionStorage.setItem('userCart', JSON.stringify(buyed))
@@ -65,12 +65,13 @@ export default function Detail(){
     }, [buyed])
 
     useEffect(()=>{
+        if(localStorage.getItem('currentUser') !== null){
+            setIsBeli(prev=>!prev)
+        }
         if(buyed === null){
             setBuyed(JSON.parse(sessionStorage.getItem('userCart')))
         }
     }, [])
-
-    console.log(buyed)
 
     return (
         <>
@@ -118,7 +119,7 @@ export default function Detail(){
                     <button onClick={handleClickinc} className="bg-[#b19eeb] hover:bg-[#6C4AB6] w-16 text-white font-black text-2xl">+</button>
                 </div>
                 <p className="text-gray-400 text-sm">Min. pembelian 1 pcs</p>
-                <button type="button" onClick={()=>handleClickBuy(item.id)} className="w-full rounded-lg my-5 bg-[#b19eeb] hover:bg-[#6C4AB6] h-10 text-lg font-semibold text-white">B e l i</button>
+                <button type="button" onClick={()=>handleClickBuy(item.id)} className="w-full rounded-lg my-5 bg-[#b19eeb] hover:bg-[#6C4AB6] h-10 text-lg font-semibold text-white" disabled={isBeli ? false : true}>B e l i</button>
             </div>
         </div>
         </div>
