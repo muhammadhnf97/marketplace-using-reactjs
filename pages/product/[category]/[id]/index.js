@@ -76,8 +76,8 @@ export default function Detail(){
     return (
         <>
         <div className="max-w-7xl mx-auto">
-        <div key={item.id} className="my-5 flex">
-            <div className="w-[500px] h-full flex flex-col border p-2 mr-3 rounded-lg">
+        <div key={item.id} className="my-5 flex flex-col md:flex-row">
+            <div className="md:w-[500px] h-full flex flex-col border p-2 md:mr-3 mx-3 rounded-lg">
                 <div className="w-full h-[17rem] overflow-hidden mb-1 flex justify-items-center items-center relative">
                     <Image src={item.thumbnail} alt="img" fill className="rounded-lg relative"/>
                 </div>
@@ -93,13 +93,12 @@ export default function Detail(){
                     })}
                 </div>
             </div>
-            <div className="border p-5 mx-3 rounded-lg">
+
+            <div className="border p-5 mx-3 rounded-lg md:my-0 my-5">
                 <h1 className="font-bold text-2xl">{item.title}</h1>
                 <div className="flex gap-5">
                     <div className="flex mb-3">
-                        <picture>
-                            <img src="../../images/star.png" className="h-5 w-5"/>
-                        </picture>
+                        <Image src="/images/star.png" alt="star" width={20} height={20}/>
                         <span>{item.rating}</span>
                     </div>
                     <div className="flex mb-3">
@@ -111,7 +110,7 @@ export default function Detail(){
                 <p className="text-sm text-slate-500"><span className="bg-red-300 rounded-sm px-1 font-semibold text-red-700">{Math.ceil(item.discountPercentage)}%</span> <span className="line-through">Rp.{item.price * 15000},- </span></p>
                 <p>{item.description}</p>
             </div>
-            <div className="w-80 h-fit border ml-3 rounded-lg p-5">
+            <div className="md:w-80 h-fit border md:ml-3 rounded-lg p-5 md:mx-0 mx-3">
                 <p className="font-semibold text-lg mb-3">Atur jumlah</p>
                 <div className="border border-[#b19eeb] hover:border-[#6C4AB6] rounded-lg flex justify-between overflow-hidden">
                     <button onClick={handleClickDec} className="bg-[#b19eeb] hover:bg-[#6C4AB6] w-16 text-white font-black text-2x ">-</button>

@@ -3,6 +3,7 @@ import ModalCart from './ModalCart'
 import Cart from './Cart'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 
 export default function Navbar (){
@@ -158,54 +159,58 @@ export default function Navbar (){
         handleChangePassword={handleChangePassword}
         handleSubmitLogin={handleSubmitLogin}
          />}
-        {!isModalCart && <ModalCart 
+        {!isModalCart && <div className='relative z-20'><ModalCart 
         userCart={userCart}
-        handleClickCart={handleClickCart}/>}
-        <div className='w-full h-24 shadow-md sticky top-0 z-20 bg-white'>
-            <div className='max-w-7xl h-full mx-auto items-center justify-between flex'>
+        handleClickCart={handleClickCart}/></div>}
+        <div className='w-full h-20 md:h-24 shadow-md sticky top-0 z-20 bg-white px-2'>
+            <div className='md:max-w-7xl w-full h-full mx-auto items-center justify-between flex'>
                 <Link href="/">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-[#6C4AB6] to-[#8D9EFF] text-transparent bg-clip-text mr-5">Estock</h1>
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-[#6C4AB6] to-[#8D9EFF] text-transparent bg-clip-text md:mr-5">Estock</h1>
                 </Link>
-                <div className="w-full mx-5 rounded-md overflow-hidden flex border-[#8D72E1]">
-                    <button onClick={handleClickKategori} className="bg-[#8D72E1] border-2 border-[#8D72E1] hover:border-[#6C4AB6] hover:bg-[#6C4AB6] px-2 py-1 text-white font-semibold">Kategori</button>
-                    <input type="text" onChange={(e)=>handleChangeSearch(e)} id="search" name="search" className="w-full border px-3 focus:border-[#8D72E1] outline-none duration-200"></input>
-                    <button onClick={handleClickSearch} className="bg-[#8D72E1] px-2 py-1 border-2 border-[#8D72E1] hover:border-[#6C4AB6] hover:bg-[#6C4AB6]">
-                        <img src="../../images/search.png" className="w-7"/>
+                <div className="w-full ml-5 md:mx-5 rounded-md overflow-hidden flex border-[#8D72E1] h-8 md:h-fit">
+                    <button onClick={handleClickKategori} className="bg-[#8D72E1] border-2 border-[#8D72E1] hover:border-[#6C4AB6] hover:bg-[#6C4AB6] md:px-2 md:py-1 text-white font-semibold md:text-base text-xs px-2">Kategori</button>
+                    <input type="text" onChange={(e)=>handleChangeSearch(e)} id="search" name="search" className="w-full border px-2 md:px-3 focus:border-[#8D72E1] outline-none duration-200"></input>
+                    <button onClick={handleClickSearch} className="bg-[#8D72E1] px-2 md:px-2 md:py-1 border-2 border-[#8D72E1] hover:border-[#6C4AB6] hover:bg-[#6C4AB6]">
+                        <Image src="/images/search.png" alt="icon-search" width={40} height={40} className="w-10"/>
                     </button>
                 </div>
+                <div className='hidden md:block'>
                 <Cart
                 isImageCart={isImageCart}
                 handleMouseEnter={handleMouseEnter}
                 handleMouseLeave={handleMouseLeave}
                 handleClickCart={handleClickCart} />
-                {isLogin && <div className="flex ml-5">
-                    <button onClick={handleClickModalLogin} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md mr-1">Masuk</button>
-                    <Link href="/daftar">
-                        <button className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] bg-[#8D72E1] hover:bg-[#6C4AB6] text-white font-semibold px-2 py-1 rounded-md ml-1">Daftar</button>
-                    </Link>
-                </div>}
-                {!isLogin && <div className="flex ml-5">
-                    <div className="text-sm w-fit">
-                        <span className="">{currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
-                        <p className="font-semibold">{currentUser.lastName}</p>
-                    </div>
-                    <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold px-2 py-1 rounded-md ml-2" >Logout</button>
-                </div>}
+                </div>
+                <div className='hidden md:block'>
+                    {isLogin && <div className="flex md:ml-5">
+                        <button onClick={handleClickModalLogin} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold md:px-2 md:py-1 rounded-md mr-1 text-sm md:text-base p-1">Masuk</button>
+                        <Link href="/daftar">
+                            <button className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] bg-[#8D72E1] hover:bg-[#6C4AB6] text-white font-semibold md:px-2 md:py-1 rounded-md md:ml-1 text-sm md:text-base p-1">Daftar</button>
+                        </Link>
+                    </div>}
+                    {!isLogin && <div className="flex md:ml-5">
+                        <div className="text-sm w-fit">
+                            <span className="md:text-base text-xs">{currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
+                            <p className="font-semibold md:text-base text-xs">{currentUser.lastName}</p>
+                        </div>
+                        <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold p-1 md:px-2 md:py-1 rounded-md ml-2 text-sm md:text-base" >Logout</button>
+                    </div>}
+                </div>
             </div>
-            {!isKategori && <div className='absolute w-full h-screen'>
+            {!isKategori && <div className='absolute w-full h-screen left-0'>
                 <button className='absolute w-full h-full' onClick={handleClickKategori}></button>
-                <div className='absolute w-[70rem] h-fit bg-black opacity-90 top-0 left-1/2 transform -translate-x-1/2 p-5 flex'>
-                    <section className="border-r-2 border-white w-[20rem] grid grid-cols-2 px-2">
+                <div className='absolute md:w-[70rem] h-fit bg-black opacity-90 top-0 left-1/2 transform -translate-x-1/2 p-2 md:p-5 flex md:flex-row flex-col'>
+                    <section className="border-b-2 md:border-r-2 border-white w-[20rem] grid grid-cols-2 px-2 mx-auto pb-5 md:pb-0 md:border-b-0">
                         {allCategory.map(data=>{
                             return (
                             <span key={data} className="text-white hover:text-[#6C4AB6] duration-200 cursor-pointer z-20" onClick={()=>handleClickCategoriesItem(data)}>{data.toUpperCase().slice(0,1)}{data.slice(1)}</span>
                             )
                         })}
                     </section>
-                    <section className='w-[50rem] grid grid-cols-2 gap-2 px-5 h-fit'>
+                    <section className='w-full md:w-[50rem] grid grid-cols-2 gap-2 px-5 h-fit items-center mt-5 mb-10 md:my-0'>
                         {categoryItems.map(data=>{
                             return (
-                                <Link key={data.id} href={`/product/${data.category}/${data.id}`} className="border-b group">
+                                <Link key={data.id} href={`/product/${data.category}/${data.id}`} className="md:border-b group grid grid-cols-2 md:grid-cols-none  md:w-full">
                                 <span className='text-white group-hover:text-[#6C4AB6] duration-200' onClick={handleClickKategori}>{data.title}</span>
                                 </Link>
                             )
@@ -218,13 +223,13 @@ export default function Navbar (){
             </div>}
             {!isSearch && <div className='absolute w-full h-screen'>
             <button className='absolute w-full h-full' onClick={handleClickSearch}></button>
-            <div className='absolute w-[70rem] h-[15rem] bg-white top-0 left-1/2 transform -translate-x-1/2 px-5 flex-col overflow-y-scroll shadow-md border-b'>
+            <div className='absolute w-80 md:w-[70rem] h-[15rem] bg-white top-0 left-1/2 transform -translate-x-1/2 px-5 flex-col overflow-y-scroll shadow-md border-b'>
             {searchResult.map(data=>{
                 return (
                     <Link key={data.id} href={`/product/${data.category}/${data.id}`}>
                     <div className='flex my-1 hover:bg-[#8D72E1] p-1 overflow-hidden'>
                         <div className='w-14 h-14  border p-1 rounded-md'>
-                            <img src={data.image} />
+                            <Image src={data.image} alt="img-search" width={56} height={56} />
                         </div>
                         <p className='mx-10 text-lg font-semibold self-center'>{data.title}</p>
                     </div>
@@ -233,6 +238,33 @@ export default function Navbar (){
             })}
             </div>
             </div>}
+        </div>
+        <div className='h-fit w-full border fixed bottom-0 z-30 bg-white shadow-md items-center grid grid-cols-3 justify-around px-10 md:hidden py-1' >
+            <Link href="/">
+                <Image src={"/images/icons/home.png"} alt={"image"} width={40} height={40} />
+            </Link>
+            <div className='block'>
+                <Cart
+                isImageCart={isImageCart}
+                handleMouseEnter={handleMouseEnter}
+                handleMouseLeave={handleMouseLeave}
+                handleClickCart={handleClickCart} />
+            </div>
+            <div className='block h-fit w-fit'>
+                {isLogin && <div className="flex">
+                    <button onClick={handleClickModalLogin} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold rounded-md mr-1 text-sm p-1">Masuk</button>
+                    <Link href="/daftar">
+                        <button className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] bg-[#8D72E1] hover:bg-[#6C4AB6] text-white font-semibold rounded-md text-sm p-1">Daftar</button>
+                    </Link>
+                </div>}
+                {!isLogin && <div className="flex p-1">
+                    <div className="text-sm w-fit">
+                        <span className="text-xs">{currentUser.gender === "male" ? "Mr." : "Mrs."}</span>
+                        <p className="font-semibold text-xs">{currentUser.lastName}</p>
+                    </div>
+                    <button onClick={handleClickLogout} className="border-2 border-[#8D72E1] hover:border-[#6C4AB6] text-[#8D72E1] hover:text-[#6C4AB6] font-semibold p-1 md:px-2 md:py-1 rounded-md ml-2 text-sm md:text-base" >Logout</button>
+                </div>}
+            </div>
         </div>
         </>
     )

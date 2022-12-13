@@ -1,8 +1,8 @@
 export default function ModalLogin({handleClickModalLogin, handleChangeUsername, handleChangePassword, handleSubmitLogin}){
     return(
-        <div key={1} className="w-full h-full mx-auto text-center p-20 bg-black bg-opacity-70 fixed z-30">
+        <div key={1} className="w-full h-full mx-auto text-center p-10 md:p-20 bg-black bg-opacity-70 fixed z-30">
             <button onClick={handleClickModalLogin} className="absolute w-full h-full top-0 right-0 -z-10"></button>
-            <div className="w-96 h-fit border mx-auto my-32 rounded-lg shadow-md bg-white py-10 px-5 opacity-100">
+            <div className="max-w-md md:w-96 h-fit border md:mx-auto my-32 rounded-lg shadow-md bg-white py-10 px-5 opacity-100">
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-[#6C4AB6] to-[#8D9EFF] text-transparent bg-clip-text">Estock</h1>
                 <p className="font-bold italic">Your best place to buy stuff</p>
                 <div className="flex justify-between my-5 h-fit items-baseline">

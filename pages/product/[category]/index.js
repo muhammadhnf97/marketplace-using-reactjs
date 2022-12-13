@@ -17,7 +17,7 @@ export default function Item (){
     return (
         <>
         <div className="max-w-7xl mx-auto my-10">
-            <div className="grid grid-cols-5">
+            <div className="w-full grid grid-cols-2 md:grid-cols-5 justify-items-center">
                 <ItemsCard getDataItems={items} />
             </div>
         </div>

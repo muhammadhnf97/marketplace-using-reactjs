@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function ModalLogin({userCart, handleClickCart}){
     const handleClickTutup = () => {
         handleClickCart()
@@ -27,10 +29,10 @@ export default function ModalLogin({userCart, handleClickCart}){
             }, 0)}</p>
 
             
-            <button onClick={handleClickTutup} className="shadow-md absolute left-10 bottom-20 transform -translate-y-1/2 z-10 w-fit h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-x-3 origin-right">
+            <button onClick={handleClickTutup} className="shadow-md absolute left-1/2 -translate-x-1/2 md:left-10 md:transform-none bottom-20 transform md:-translate-y-1/2 z-10 w-fit h-fit md:h-16 rounded-full bg-white hover:bg-[#e7dfff] duration-200 px-3 hover:px-1 hover:-translate-y-3  md:hover:-translate-x-3 origin-right">
                 <div className="flex">
-                    <img src="../../images/left-icon.png" className="w-16" />
-                    <span className="text-2xl text-[#6C4AB6] font-semibold self-center mx-5">T u t u p</span>
+                    <Image src="/images/left-icon.png" alt="left-icon" width={64} height={64} className="w-10 md:w-16 tranform md:transform-none -rotate-90 md:rotate-0" />
+                    <span className="hidden md:block text-lg md:text-2xl text-[#6C4AB6] font-semibold self-center mx-5">T u t u p</span>
                 </div>
             </button>
         </div>
