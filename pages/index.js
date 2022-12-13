@@ -61,7 +61,8 @@ export default function Home() {
       </Link>
     )
   })
-
+  
+  
   const simplyBackground = () => {
     return (
       <>

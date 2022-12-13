@@ -10,10 +10,10 @@ export default function ModalLogin({handleClickModalLogin, handleChangeUsername,
                 </div>
                 <form onSubmit={(e)=>handleSubmitLogin(e)}>
                     <div className="text-left my-5">
-                        <label htmlFor="username" className="font-semibold">Username
+                        <label htmlFor="username" className="font-semibold">Username : <span className="text-slate-600 italic text-sm">kminchelle</span>
                             <input type="text" id="username" name="username" onChange={(e)=>handleChangeUsername(e)}  className="w-full h-10 px-3 rounded-lg border outline-none focus:border-[#6C4AB6]" />
                         </label>
-                        <label htmlFor="password" className="font-semibold">Password
+                        <label htmlFor="password" className="font-semibold">Password : <span className="text-slate-600 italic text-sm">0lelplR</span>
                             <input type="password" id="password" name="password" onChange={(e)=>handleChangePassword(e)}  className="w-full h-10 px-3 rounded-lg border outline-none focus:border-[#6C4AB6]" />
                         </label>
                     </div>
